@@ -6,8 +6,7 @@ import "./App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider} from "./contexts/LanguageContext";
 
-class App extends React.Component {
-  render () {
+const App = () => {
     return (
       <ThemeProvider>
         <LanguageProvider>
@@ -19,6 +18,5 @@ class App extends React.Component {
       </ThemeProvider>
       )
   }
-}
 
 export default App;
