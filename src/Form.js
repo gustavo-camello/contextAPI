@@ -14,10 +14,36 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import withStyles from "@material-ui/core/styles/withStyles";
 import styles from "./styles/FormStyles";
+import {LanguageContext} from "./contexts/LanguageContext";
+
+const words = {
+    english: {
+        signIn: "Sign in",
+        email: "Email",
+        password: "Password",
+        remember: "Remember Me"
+    },
+    french: {
+        signIn: "Sign Connectar",
+        email: "Adresse Electronique",
+        password: "Mot de Passe",
+        remember: "Souviens-toi De Moi"
+    },
+    portugues: {
+        signIn: "Cadastre-se",
+        email: "Enter Email",
+        password: "Senha",
+        remember: "Lembrar-me"
+    }
+}
 
 class Form extends Component {
+    static contextType = LanguageContext;
     render () {
+        const {language, changeLanguage} = this.context;
         const {classes} = this.props;
+        const {email, signIn, password, remember} = words[language];
+
         return (
             <main className={classes.main}>
                 <Paper className={classes.paper}>
@@ -27,28 +53,28 @@ class Form extends Component {
                     <Typography variant="h5">
                         Sign In
                     </Typography>
-                    <Select value="English">
-                        <MenuItem value="English">English</MenuItem>
-                        <MenuItem value="French">French</MenuItem>
-                        <MenuItem value="Portugues">Portugues</MenuItem>
+                    <Select value={language} onChange={changeLanguage}>
+                        <MenuItem value="english">English</MenuItem>
+                        <MenuItem value="french">French</MenuItem>
+                        <MenuItem value="portugues">Portugues</MenuItem>
                     </Select>
                     <form className={classes.form}>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">Email</InputLabel>
+                            <InputLabel htmlFor="email">{email}</InputLabel>
                             <Input id="email" name="email" autoFocus />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <InputLabel htmlFor="password">{password}</InputLabel>
                             <Input id="password" name="password" autoFocus />
                         </FormControl>
-                        <FormControlLabel control={<Checkbox color="primary" />} label="Remember Me" />
+                        <FormControlLabel control={<Checkbox color="primary" />} label={remember} />
                         <Button 
                             variant="contained"
                             type="submit" 
                             fullWidth color="primary" 
                             className={classes.submit}
                         >
-                            Sign in
+                            {signIn}
                         </Button>
                     </form>
                 </Paper>

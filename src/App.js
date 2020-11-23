@@ -4,16 +4,18 @@ import PageContent from "./PageContent";
 import Form from "./Form";
 import "./App.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
-
+import { LanguageProvider} from "./contexts/LanguageContext";
 
 class App extends React.Component {
   render () {
     return (
       <ThemeProvider>
-        <PageContent>
-          <NavBar />
-          <Form />
-        </PageContent>
+        <LanguageProvider>
+          <PageContent>
+              <NavBar />
+              <Form />
+          </PageContent>
+        </LanguageProvider>
       </ThemeProvider>
       )
   }
